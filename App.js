@@ -20,7 +20,19 @@ global.apiConfig = {
     searchAPI: (phrase) => apiURL + 'search/' + phrase + '?' + 'appId=' + appID + '&appKey=' + appKey + '&',
     itemAPI: () => apiURL + 'item?' + 'appId=' + appID + '&appKey=' + appKey + '&',
     brandAPI: (brandID) => apiURL + 'brand/' + brandID + '?' + 'appId=' + appID + '&appKey=' + appKey + '&',
-    brandSearchAPI: () => apiURL + 'brand/search?' + 'appId=' + appID + '&appKey=' + appKey + '&'
+    brandSearchAPI: () => apiURL + 'brand/search?' + 'appId=' + appID + '&appKey=' + appKey + '&',
+    globalData1: '',
+    api2URL: "https://trackapi.nutritionix.com/v2/search/instant",
+    makeQueryString: (url, params) => {
+        var str = [];
+        for (const key in params) {
+            if (params.hasOwnProperty(key)) {
+                const element = params[key];
+                str.push(key + '=' + encodeURIComponent(element));
+            }
+        }
+        return url + '?' + str.join('&');
+    }
 }
 const MainNavigator = createStackNavigator({
     Login: {

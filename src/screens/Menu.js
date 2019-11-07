@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import {
     Dimensions,
     StyleSheet,
@@ -9,6 +11,7 @@ import {
     Text,
 } from 'react-native';
 import { tsConstructorType } from '@babel/types';
+import ConfigData from './config';
 
 const window = Dimensions.get('window');
 const uri = 'https://pickaface.net/gallery/avatar/Opi51c74d0125fd4.png';
@@ -18,7 +21,7 @@ const styles = StyleSheet.create({
         flex: 1,
         width: window.width,
         height: window.height,
-        backgroundColor: 'gray',
+        backgroundColor: '#ddd',
     },
     avatarContainer: {
         marginBottom: 20,
@@ -75,19 +78,42 @@ export default class Menu extends React.Component {
                 </View>
 
                 <Text
-                    onPress={() => { this.onClickMenuItem('Home', 0) }}
+                    onPress={() => { this.onClickMenuItem('Home', 0); this.props.contentView.setState({ tabIndex: ConfigData.TAB_DASHBOARD }) }}
                     style={[styles.item, this.state.selectedIndex == 0 ? { backgroundColor: 'white' } : {}]}
-                >
-                    About
-            </Text>
+                ><Icon name="home" size={20}></Icon> Home</Text>
 
                 <Text
-                    onPress={() => { this.onClickMenuItem('Contacts', 1) }}
+                    onPress={() => { this.onClickMenuItem('Contacts', 1); this.props.contentView.setState({ tabIndex: ConfigData.TAB_TRACK }) }}
                     style={[styles.item, this.state.selectedIndex == 1 ? { backgroundColor: 'white' } : {}]}
-                >
-                    Contacts
-            </Text>
-            </ScrollView>
+                ><Icon name="magic" size={20}></Icon> Track</Text>
+
+                <Text
+                    onPress={() => { this.onClickMenuItem('Contacts', 2); this.props.contentView.setState({ tabIndex: ConfigData.TAB_PREFERENCE }) }}
+                    style={[styles.item, this.state.selectedIndex == 2 ? { backgroundColor: 'white' } : {}]}
+                ><Icon name="cogs" size={20}></Icon> Preference</Text>
+
+                <Text
+                    onPress={() => {
+                        this.onClickMenuItem('Contacts', 3); this.props.contentView.setState({ tabIndex: ConfigData.TAB_DAILYGOALS });
+                    }}
+                    style={[styles.item, this.state.selectedIndex == 3 ? { backgroundColor: 'white' } : {}]}
+                ><Icon name="dot-circle-o" size={20}></Icon> Daily Goals</Text>
+
+                <Text
+                    onPress={() => { this.onClickMenuItem('Contacts', 4); this.props.contentView.setState({ tabIndex: ConfigData.TAB_MYCOACH }); }}
+                    style={[styles.item, this.state.selectedIndex == 4 ? { backgroundColor: 'white' } : {}]}
+                ><Icon name="user" size={20}></Icon> My coach</Text>
+
+                <Text
+                    onPress={() => { this.onClickMenuItem('Contacts', 5); this.props.contentView.setState({ tabIndex: ConfigData.TAB_HELP }); }}
+                    style={[styles.item, this.state.selectedIndex == 5 ? { backgroundColor: 'white' } : {}]}
+                ><Ionicons name="md-help" size={20}></Ionicons> Help</Text>
+
+                <Text
+                    onPress={() => { this.onClickMenuItem('Contacts', 6); this.props.contentView.nagivation.goBack(); }}
+                    style={[styles.item, this.state.selectedIndex == 6 ? { backgroundColor: 'white' } : {}]}
+                ><Icon name="power-off" size={20}></Icon> Sign out</Text>
+            </ScrollView >
         );
     }
 }

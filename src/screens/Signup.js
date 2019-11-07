@@ -16,10 +16,12 @@ import Button from "../components/Button";
 import { Config } from '@jest/types';
 import ConfigData from './config';
 
-export default class LoginScreen extends Component {
+export default class SignupScreen extends Component {
     state = {
+        name: "",
         email: "",
-        password: ""
+        password: "",
+        confirm_password: ""
     };
 
     handleEmailChange = (email) => {
@@ -44,6 +46,11 @@ export default class LoginScreen extends Component {
                     </View>
                     <View style={{ flex: 1, width: "80%" }}>
                         <FormTextInput
+                            value={this.state.name}
+                            onChangeText={(name) => { this.setState({ name: name }) }}
+                            placeholder={"Your name"}
+                        />
+                        <FormTextInput
                             value={this.state.email}
                             onChangeText={this.handleEmailChange}
                             placeholder={"E-mail"}
@@ -53,6 +60,12 @@ export default class LoginScreen extends Component {
                             secureTextEntry={true}
                             onChangeText={this.handlePasswordChange}
                             placeholder={"Password"}
+                        />
+                        <FormTextInput
+                            value={this.state.confirm_password}
+                            secureTextEntry={true}
+                            onChangeText={(confirm_password) => { this.setState({ confirm_password: confirm_password }) }}
+                            placeholder={"Confirm Password"}
                         />
                         <Button label={"Log In"} onPress={(navigate) => {
                             let email = this.state.email.trim();
